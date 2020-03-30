@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PostController@posts')->name('posts.all');
-Route::get('post/{post}', 'PostController@post')->name('posts.single');
+Route::get('/', 'PageController@posts')->name('posts.all');
+Route::get('blog/{post}', 'PageController@post')->name('posts.single');
 
 Auth::routes();
+
+Route::resource('posts', 'Backend\PostController');
 
 Route::get('/home', 'HomeController@index')->name('home');
