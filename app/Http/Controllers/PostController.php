@@ -3,8 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Post;
 class PostController extends Controller
 {
-    //
+    public function posts()
+    {
+        return view('posts', [
+           'posts' => Post::with('user')->latest()->paginate(5)
+        ]);
+    }
+
+    public function post(Post $post)
+    {
+        return view('post', [
+            'post' => $post
+        ]);
+    }
 }

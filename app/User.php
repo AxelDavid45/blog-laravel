@@ -15,25 +15,37 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable
+        = [
+            'name',
+            'email',
+            'password',
+        ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden
+        = [
+            'password',
+            'remember_token',
+        ];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts
+        = [
+            'email_verified_at' => 'datetime',
+        ];
+
+    //Relation 1:N
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

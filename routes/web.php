@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostController@posts')->name('posts.all');
+Route::get('post/{post}', 'PostController@post')->name('posts.single');
 
 Auth::routes();
 
