@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="http://blog.me/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/4bc87b4ae7.js" crossorigin="anonymous"></script>
     <title>Axel Espinosa</title>
 

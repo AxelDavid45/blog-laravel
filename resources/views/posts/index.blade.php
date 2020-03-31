@@ -6,7 +6,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="text-center">Manage Posts
+                        <h2 class="text-center">
+                            Manage Posts
                             <a href="{{route('posts.create')}}"
                                class="float-right btn btn-outline-primary btn-sm">
                                 New Post <i class="fas fa-plus-circle"></i>
@@ -51,6 +52,7 @@
                         </table>
                     </div>
                 </div>
+                {{ $posts->links() }}
             </div>
         </div>
     </div>
