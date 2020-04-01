@@ -9,11 +9,17 @@
                         <h3 class="text-center">Create a post</h3>
                     </div>
                     <div class="card-body">
+                        @if(session('status'))
+                            <div class="alert alert-info">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <form
                             action="{{ route('posts.store') }}"
                             method="POST"
                             enctype="multipart/form-data"
                         >
+                            @csrf
                             <div class="form-group">
                                 <label for="title">Titulo</label>
                                 <input required type="text" name="title" class="form-control">

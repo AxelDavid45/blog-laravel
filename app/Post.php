@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use Sluggable;
-
+    protected $fillable = [
+        'user_id', 'title', 'image', 'body', 'iframe'
+    ];
     /**
      * Return the sluggable configuration array for this model.
      *
