@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PageController@posts')->name('posts.all');
-Route::get('blog/{post}', 'PageController@post')->name('posts.single');
+Route::get('blog/{slug}', 'PageController@post')->name('posts.single');
 
 Auth::routes();
 

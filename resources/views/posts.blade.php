@@ -20,7 +20,8 @@
                             <p class="card-text">
                                 {{ $post->get_excerpt }}
                             </p>
-                            <a href="{{ route('posts.single', ['post' => $post]) }}">Read more</a>
+                            <a href="{{ route('posts.single', ['slug' => $post->slug]) }}">Read
+                                more</a>
                             <p class="text-muted mb-0">
                                 <em>
                                     &ndash; {{ $post->user->name }}
