@@ -41,7 +41,9 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm
-                                            btn-outline-danger">
+                                            btn-outline-danger"
+                                            onclick="return confirm('Are you sure you want to ' +
+                                             'delete this post?');">
                                                 <i class="fas fa-trash"></i> Delete
                                             </button>
                                         </form>

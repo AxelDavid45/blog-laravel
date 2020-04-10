@@ -18,6 +18,8 @@ Route::get('blog/{post}', 'PageController@post')->name('posts.single');
 
 Auth::routes();
 
-Route::resource('posts', 'Backend\PostController');
+Route::resource('posts', 'Backend\PostController')
+    ->middleware('auth')
+    ->except('show');
 
 Route::get('/home', 'HomeController@index')->name('home');

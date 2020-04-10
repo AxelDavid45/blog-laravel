@@ -8,6 +8,7 @@ use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -53,27 +54,15 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param \App\Post $post
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Post $post
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -82,11 +71,31 @@ class PostController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param \App\Post                $post
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Post $post)
     {
-        //
+        //Update the fields
+        $post->update(
+            [
+                'title' => $request->input('title'),
+                'body'  => $request->input('body'),
+                'iframe' => $request->input('iframe')
+            ]
+        );
+
+        //Update if the image exists
+        if ($request->file('image')) {
+            //Delete the old image
+            $imageData = ['disk' => 'public', 'file' => $post->image];
+            $this->deleteImage($imageData);
+            //Update the field
+            $post->image = $request->file('image')->store('posts', 'public');
+            //Save the model
+            $post->save();
+        }
+
+        return back()->with('status', 'Updated successfully');
     }
 
     /**
@@ -94,10 +103,30 @@ class PostController extends Controller
      *
      * @param \App\Post $post
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Post $post)
     {
-        //
+        //Delete the image
+        $imageData = [
+            'disk' => 'public',
+            'file' => $post->image
+        ];
+
+        $this->deleteImage($imageData);
+        //Delete the record
+        $post->delete();
+
+        return back()->with('status', 'Post deleted');
+    }
+
+
+    /**
+     * Delete an image from an specific disk
+     * @param array $data['disk','file']
+     */
+    private function deleteImage(array $data) {
+        Storage::disk($data['disk'])->delete($data['file']);
     }
 }
